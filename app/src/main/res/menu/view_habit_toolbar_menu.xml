@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/pencil"
+        android:title="@string/edit_habit"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/export"
+        android:title="@string/export"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete"
+        app:showAsAction="never" />
+
+
+</menu>

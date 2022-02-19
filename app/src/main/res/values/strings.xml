@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Habit Log</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_text">Hello There!</string>
+    <string name="new_habit_hint">I will do…</string>
+    <string name="create_new_habit">Create Habit</string>
+    <string name="edit_habit">Edit Habit</string>
+    <string name="remind_me_every_day_at">Remind Me Every day at</string>
+    <string name="alarm_icon">Alarm Icon</string>
+    <string name="habit_alarm_notification_name">Habit Notifications</string>
+    <string name="habit_alarm_notification_description">Notifications for reminding daily habits</string>
+    <string name="habit_action_completed">Completed</string>
+    <string name="habit_action_skipped">Skipped</string>
+    <string name="overview">Overview</string>
+    <string name="completed">Completed</string>
+    <string name="skipped">Skipped</string>
+    <string name="best_streak">Best Streak</string>
+    <string name="everyday">Everyday</string>
+    <string name="best_streaks">Best Streaks</string>
+    <string name="content_desc_alarm_icon">alarm_icon</string>
+    <string name="completion">Completion</string>
+    <string name="calendar">Calendar</string>
+    <string name="search">Search</string>
+    <string name="habit_question_hint">Eg. Did you exercise today?</string>
+    <string name="question">Question</string>
+    <string name="notes_optional">Notes (optional)</string>
+    <string name="delete">Delete</string>
+    <string name="notification_action_yes">Yes</string>
+    <string name="notification_action_no">No</string>
+    <string name="export">Export</string>
+    <string name="no_data_available">No data available</string>
+    <string name="ratio">%1s%2s</string>
+    <string name="streakDays">%1s Days</string>
+    <string name="complete_action_text">You Completed %1s on %2s</string>
+    <string name="skip_action_text">You Skipped %1s on %2s</string>
+</resources>

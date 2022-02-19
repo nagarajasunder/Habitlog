@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.geekydroid.habbitlog.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_newHabitFragment"
+            app:destination="@id/newHabitFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewHabitFragment"
+            app:destination="@id/viewHabitFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/newHabitFragment"
+        android:name="com.geekydroid.habbitlog.ui.NewHabitFragment"
+        android:label="fragment_new_habit"
+        tools:layout="@layout/fragment_new_habit" />
+    <fragment
+        android:id="@+id/editHabit"
+        android:name="com.geekydroid.habbitlog.ui.EditHabitFragment"
+        android:label="fragment_edit_habit"
+        tools:layout="@layout/fragment_edit_habit">
+
+        <argument
+            android:name="habit"
+            app:argType="com.geekydroid.habbitlog.entities.Habit" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewHabitFragment"
+        android:name="com.geekydroid.habbitlog.ui.ViewHabitFragment"
+        android:label="fragment_view_habit"
+        tools:layout="@layout/fragment_view_habit">
+        <argument
+            android:name="habit"
+            app:argType="com.geekydroid.habbitlog.entities.Habit" />
+        <action
+            android:id="@+id/action_viewHabitFragment_to_editHabit"
+            app:destination="@id/editHabit"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>

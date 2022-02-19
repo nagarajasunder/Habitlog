@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/habit_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_habit_name"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_created_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_habit_name"
+                android:layout_alignTop="@+id/iv_habit_time"
+                android:layout_alignBottom="@+id/iv_habit_time"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/iv_habit_time"
+                android:gravity="center_vertical"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:id="@+id/iv_habit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_habit_name"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@+id/tv_habit_time"
+                android:src="@drawable/alarm"
+                app:tint="@color/purple_500" />
+
+            <TextView
+                android:id="@+id/tv_habit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_habit_name"
+                android:layout_alignTop="@+id/iv_habit_time"
+                android:layout_alignBottom="@+id/iv_habit_time"
+                android:layout_alignParentEnd="true"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
