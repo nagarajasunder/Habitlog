@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Habit Log</string>
+    <string name="app_name">Routines</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -32,7 +32,7 @@
     <string name="export">Export</string>
     <string name="no_data_available">No data available</string>
     <string name="ratio">%1s%2s</string>
-    <string name="streakDays">%1s Days</string>
     <string name="complete_action_text">You Completed %1s on %2s</string>
     <string name="skip_action_text">You Skipped %1s on %2s</string>
+    <string name="total">Total</string>
 </resources>

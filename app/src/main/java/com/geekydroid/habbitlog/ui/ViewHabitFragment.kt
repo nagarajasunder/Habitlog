@@ -48,13 +48,14 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
     private lateinit var tvHabitQuestion: TextView
     private lateinit var tvHabitNotes: TextView
     private lateinit var habitAction: ImageView
-    private lateinit var currentHabitLogDate: Date
+    private var currentHabitLogDate: Date = Util.getCurrentDate()!!
     private var currentDateHabitLog: HabitLog? = null
     private var currentHabitAction: String = ""
     private lateinit var chart: HorizontalBarChart
     private var dateLabelsLeft = mutableListOf<String>()
     private lateinit var completionValue: TextView
     private lateinit var bestStreak: TextView
+    private lateinit var totalValue: TextView
     private var streakMap = mutableMapOf<String, Number>()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private val viewmodel: ViewHabitFragmentViewModel by viewModels {
@@ -69,6 +70,9 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == Activity.RESULT_OK) {
@@ -128,7 +132,8 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
             }
             if (!list.isNullOrEmpty()) {
                 val ratios = viewmodel.calculateValues(list)
-                updateRatios(ratios)
+                println("debug: view ${completedList.size}")
+                updateRatios(ratios, completedList.size)
             }
 
         }
@@ -171,15 +176,20 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
 
         calendarView.setOnDateChangeListener { _, year, month, day ->
             currentHabitLogDate = Util.getFormattedDate(day, month, year)!!
-
-            viewmodel.getHabitLogByDate(habit.habitId, currentHabitLogDate)
+            if (Util.isFutureDate(currentHabitLogDate)) {
+                dayCardView.visibility = View.INVISIBLE
+                showToast("You cannot log habits for future dates")
+            } else {
+                viewmodel.getHabitLogByDate(habit.habitId, currentHabitLogDate)
+            }
         }
     }
 
 
-    private fun updateRatios(ratios: String) {
+    private fun updateRatios(ratios: String, totalCompletion: Int) {
         completionValue.text = getString(R.string.ratio, ratios, "%")
-        bestStreak.text = getString(R.string.streakDays, Util.bestStreak.toString())
+        totalValue.text = totalCompletion.toString()
+        bestStreak.text = Util.bestStreak.toString()
     }
 
     private fun setChart(dateList: List<HabitLog>) {
@@ -238,6 +248,7 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
 
     private fun setUI() {
         habit = args.habit
+        requireActivity().actionBar?.title = habit.habitName
         val systemTimeFormat = DateFormat.is24HourFormat(requireContext())
         viewmodel.habitId = habit.habitId
         calendarView = fragmentView.findViewById(R.id.calendar_view)
@@ -249,6 +260,7 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
         habitAction = fragmentView.findViewById(R.id.habit_action)
         chart = fragmentView.findViewById(R.id.chartView)
         completionValue = fragmentView.findViewById(R.id.tv_completion_value)
+        totalValue = fragmentView.findViewById(R.id.tv_total_value)
         bestStreak = fragmentView.findViewById(R.id.tv_streak_value)
 
         habitTime.text = Util.formatTime(habit.habitHour, habit.habitMin, systemTimeFormat)
@@ -401,8 +413,4 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
 
 
 }
-
-
-
-
 

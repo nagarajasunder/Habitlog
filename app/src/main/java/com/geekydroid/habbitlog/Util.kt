@@ -186,7 +186,7 @@ class Util {
             return sdf.format(date)
         }
 
-        fun fromLongToTimeString(time:Long,format:String): String? {
+        fun fromLongToTimeString(time: Long, format: String): String? {
             val sdf = SimpleDateFormat(format, Locale.US)
             return sdf.format(time)
         }
@@ -209,6 +209,11 @@ class Util {
             return if (alarmTime == null) DateFormat.getDateTimeInstance()
                 .format(System.currentTimeMillis()) else DateFormat.getDateTimeInstance()
                 .format(alarmTime)
+        }
+
+        fun isFutureDate(date: Date): Boolean {
+            val currentDate = getCurrentDate()
+            return date.after(currentDate)
         }
 
     }
