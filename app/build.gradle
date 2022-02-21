@@ -38,10 +38,11 @@ dependencies {
 
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    def lifecycle_version = "2.4.0"
+    def lifecycle_version = "2.4.1"
     def arch_version = "2.1.0"
-    def nav_version = "2.4.0"
+    def nav_version = "2.4.1"
     def room_version = "2.4.1"
+    def lottieVersion = "3.4.2"
     def activity_version = "1.4.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -80,4 +81,12 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
+
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+
+    implementation "androidx.datastore:datastore:1.0.0"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }

@@ -1,4 +1,4 @@
-package com.geekydroid.habbitlog
+package com.geekydroid.habbitlog.receivers
 
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -8,7 +8,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.geekydroid.habbitlog.HabitLogApplication
+import com.geekydroid.habbitlog.R
+import com.geekydroid.habbitlog.Util
 import com.geekydroid.habbitlog.entities.temp
+import com.geekydroid.habbitlog.receivers.NotificationReceiver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO

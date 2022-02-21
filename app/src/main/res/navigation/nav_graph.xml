@@ -56,4 +56,19 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/viewpagerHolder"
+        android:name="com.geekydroid.habbitlog.ui.ViewpagerHolder"
+        android:label="fragment_viewpager_holder"
+        tools:layout="@layout/fragment_viewpager_holder" >
+        <action
+            android:id="@+id/action_viewpagerHolder_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/viewpagerHolder"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

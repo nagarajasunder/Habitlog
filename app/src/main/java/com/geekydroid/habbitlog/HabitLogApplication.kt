@@ -5,11 +5,16 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.geekydroid.habbitlog.datasource.MyDatabase
 import com.geekydroid.habbitlog.repo.CreateNewHabitRepository
 import com.geekydroid.habbitlog.repo.EditHabitFragmentRepository
 import com.geekydroid.habbitlog.repo.HomeFragmentRepository
 import com.geekydroid.habbitlog.repo.ViewHabitFragmentRepository
+import java.util.prefs.Preferences
+
 
 
 class HabitLogApplication : Application() {
@@ -60,5 +65,7 @@ class HabitLogApplication : Application() {
     val viewHabitFragmentRepo: ViewHabitFragmentRepository by lazy {
         ViewHabitFragmentRepository(database)
     }
+
+
 
 }

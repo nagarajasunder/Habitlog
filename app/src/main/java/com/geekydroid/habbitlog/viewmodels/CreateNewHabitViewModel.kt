@@ -6,10 +6,10 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.geekydroid.habbitlog.AlarmReceiver
 import com.geekydroid.habbitlog.HabitLogApplication
 import com.geekydroid.habbitlog.entities.Habit
 import com.geekydroid.habbitlog.entities.HabitAudit
+import com.geekydroid.habbitlog.receivers.AlarmReceiver
 import com.geekydroid.habbitlog.repo.CreateNewHabitRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

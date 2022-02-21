@@ -2,15 +2,14 @@ package com.geekydroid.habbitlog.viewmodels
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_CANCEL_CURRENT
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.geekydroid.habbitlog.AlarmReceiver
 import com.geekydroid.habbitlog.HabitLogApplication
 import com.geekydroid.habbitlog.entities.Habit
 import com.geekydroid.habbitlog.entities.HabitAudit
+import com.geekydroid.habbitlog.receivers.AlarmReceiver
 import com.geekydroid.habbitlog.repo.EditHabitFragmentRepository
 import kotlinx.coroutines.launch
 import java.text.DateFormat
@@ -34,7 +33,10 @@ class EditHabitFragmentViewModel(
             println("debug: reschedule alarm called")
             val alarmIntent = Intent(application.applicationContext, AlarmReceiver::class.java)
             alarmIntent.action = "HABIT"
-            alarmIntent.putExtra("TIME_PERIOD", DateFormat.getDateTimeInstance().format(newHabit.alarmTime))
+            alarmIntent.putExtra(
+                "TIME_PERIOD",
+                DateFormat.getDateTimeInstance().format(newHabit.alarmTime)
+            )
             alarmIntent.putExtra("HABIT_ID", newHabit.habitId)
             val alarmPendingIntent = PendingIntent.getBroadcast(
                 application.applicationContext,
@@ -43,7 +45,12 @@ class EditHabitFragmentViewModel(
                 PendingIntent.FLAG_IMMUTABLE
             )
             val alarmManager = application.alarmManager
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, newHabit.alarmTime, alarmPendingIntent)
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                newHabit.alarmTime,
+                AlarmManager.INTERVAL_DAY,
+                alarmPendingIntent
+            )
         }
     }
 }

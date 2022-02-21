@@ -35,4 +35,7 @@
     <string name="complete_action_text">You Completed %1s on %2s</string>
     <string name="skip_action_text">You Skipped %1s on %2s</string>
     <string name="total">Total</string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome_text">Welcome to Routines!!</string>
+    <string name="welcome_text_2">Keep Track of your new habits and make them as Routines!</string>
 </resources>
