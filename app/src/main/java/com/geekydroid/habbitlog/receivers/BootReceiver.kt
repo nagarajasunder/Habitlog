@@ -15,7 +15,6 @@ class BootReceiver : BroadcastReceiver() {
         Toast.makeText(context!!, "Boot Receiver called", Toast.LENGTH_LONG).show()
 
         if (intent?.action == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
-
             Toast.makeText(context!!, "Boot Receiver called inside if", Toast.LENGTH_LONG).show()
 
             println("debug: receiver boot receiver called")
