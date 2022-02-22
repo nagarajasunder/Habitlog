@@ -37,13 +37,12 @@ class CreateNewHabitViewModel(
         val alarmManager = application.alarmManager
         val intent = Intent(application.applicationContext, AlarmReceiver::class.java)
         intent.action = "HABIT"
-        intent.putExtra("TIME_PERIOD", DateFormat.getDateTimeInstance().format(habit.alarmTime))
         intent.putExtra("HABIT_ID", habit.habitId)
         val alarmPendingIntent = PendingIntent.getBroadcast(
             application.applicationContext,
             habit.habitId,
             intent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,

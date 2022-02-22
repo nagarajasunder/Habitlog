@@ -60,7 +60,6 @@ class ViewHabitFragmentViewModel(private val repo: ViewHabitFragmentRepository, 
     private fun cancelAlarm(application: HabitLogApplication, habit: Habit) {
         val intent = Intent(application.applicationContext, AlarmReceiver::class.java)
         intent.action = "HABIT"
-        intent.putExtra("TIME_PERIOD", DateFormat.getDateTimeInstance().format(habit.alarmTime))
         intent.putExtra("HABIT_ID", habitId)
 
         val alarmIntent =
@@ -68,7 +67,7 @@ class ViewHabitFragmentViewModel(private val repo: ViewHabitFragmentRepository, 
                 application.applicationContext,
                 habitId,
                 intent,
-                PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         val alarmManager = application.alarmManager
         alarmManager.cancel(alarmIntent)

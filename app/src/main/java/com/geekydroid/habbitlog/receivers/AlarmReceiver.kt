@@ -28,21 +28,7 @@ class AlarmReceiver : BroadcastReceiver() {
             val habitId = intent.getIntExtra("HABIT_ID", 0)
 
             createNotification(context!!, habitId)
-
-            val database = (context.applicationContext as HabitLogApplication).database
-            CoroutineScope(Dispatchers.IO).launch {
-                database.getTempDao()
-                    ?.insertTemp(
-                        temp(
-                            tempId = null,
-                            insertedOn = System.currentTimeMillis(),
-                            habitTime = intent.getStringExtra("TIME_PERIOD")!!
-                        )
-                    )
-            }
-
             val timePeriod = intent.getStringExtra("TIME_PERIOD")
-            Log.d(TAG, "onReceive: Alarm Received for $timePeriod")
             Toast.makeText(context, "The Alarm Just got fired $timePeriod", Toast.LENGTH_SHORT)
                 .show()
         }

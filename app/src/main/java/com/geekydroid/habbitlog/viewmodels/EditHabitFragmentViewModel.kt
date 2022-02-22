@@ -28,27 +28,23 @@ class EditHabitFragmentViewModel(
     }
 
     fun rescheduleAlarm(oldHabit: Habit, newHabit: Habit) {
-        println("debug: reschedule alarm called 1 old habit ${oldHabit.alarmTime} newHabit ${newHabit.alarmTime}")
+
         if (oldHabit.alarmTime != newHabit.alarmTime) {
-            println("debug: reschedule alarm called")
             val alarmIntent = Intent(application.applicationContext, AlarmReceiver::class.java)
             alarmIntent.action = "HABIT"
-            alarmIntent.putExtra(
-                "TIME_PERIOD",
-                DateFormat.getDateTimeInstance().format(newHabit.alarmTime)
-            )
             alarmIntent.putExtra("HABIT_ID", newHabit.habitId)
             val alarmPendingIntent = PendingIntent.getBroadcast(
                 application.applicationContext,
                 newHabit.habitId,
                 alarmIntent,
-                PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             val alarmManager = application.alarmManager
-            alarmManager.setRepeating(
+            alarmManager.cancel(alarmPendingIntent)
+            alarmManager.setExact(
                 AlarmManager.RTC_WAKEUP,
                 newHabit.alarmTime,
-                AlarmManager.INTERVAL_DAY,
+//                AlarmManager.INTERVAL_DAY,
                 alarmPendingIntent
             )
         }
