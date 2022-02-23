@@ -47,7 +47,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), HabitAdapter.HabitItemOnC
 
         viewmodel.habits.observe(viewLifecycleOwner)
         { list ->
-            println("debug: list $list")
             adapter.submitList(list)
         }
 
@@ -76,7 +75,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), HabitAdapter.HabitItemOnC
     }
 
     override fun onItemClick(habit: Habit) {
-        println("debug: habit $habit")
+
         val action = HomeFragmentDirections.actionHomeFragmentToViewHabitFragment(habit)
         fragmentView.findNavController().navigate(action)
     }

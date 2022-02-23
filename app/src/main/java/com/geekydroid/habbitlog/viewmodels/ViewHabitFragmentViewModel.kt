@@ -12,7 +12,6 @@ import com.geekydroid.habbitlog.receivers.AlarmReceiver
 import com.geekydroid.habbitlog.repo.ViewHabitFragmentRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.text.DateFormat
 import java.util.*
 
 class ViewHabitFragmentViewModel(private val repo: ViewHabitFragmentRepository, var habitId: Int) :
@@ -46,7 +45,7 @@ class ViewHabitFragmentViewModel(private val repo: ViewHabitFragmentRepository, 
         val completedList = list.filter { it.actionType == "Completed" }
         val completionRatio = (completedList.size / list.size.toFloat() * 100)
 
-        println("debug list ${list.size} completed list ${completedList.size}")
+
         return String.format("%.0f", completionRatio)
     }
 
@@ -118,7 +117,7 @@ class ViewHabitFragmentViewModel(private val repo: ViewHabitFragmentRepository, 
             fos!!.write(data.toString().toByteArray())
             fos.close()
         } catch (e: Exception) {
-            println("debug: exception ${e.message}")
+
 
         }
 

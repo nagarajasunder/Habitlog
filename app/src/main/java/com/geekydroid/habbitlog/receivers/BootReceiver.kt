@@ -5,31 +5,35 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.widget.Toast
 import com.geekydroid.habbitlog.HabitLogApplication
-import java.text.DateFormat
+import com.geekydroid.habbitlog.entities.Habit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class BootReceiver : BroadcastReceiver() {
+
+    private lateinit var habitList: List<Habit>
+
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Toast.makeText(context!!, "Boot Receiver called", Toast.LENGTH_LONG).show()
+        if (intent?.action == Intent.ACTION_BOOT_COMPLETED) {
 
-        if (intent?.action == Intent.ACTION_LOCKED_BOOT_COMPLETED) {
-            Toast.makeText(context!!, "Boot Receiver called inside if", Toast.LENGTH_LONG).show()
-
-            println("debug: receiver boot receiver called")
-            rescheduleAllAlarms(context!!)
+            CoroutineScope(IO).launch {
+                getAllHabits(context!!)
+                rescheduleAllAlarms(context)
+            }
         }
 
     }
 
-    private fun rescheduleAllAlarms(context: Context) {
-
+    private suspend fun getAllHabits(context: Context) {
         val db = (context.applicationContext as HabitLogApplication).database
-        val habitList = db.getHabitDao()?.getAllHabits("")!!.value
-        println("debug: receiver $habitList")
+        habitList = db.getHabitDao()?.getAllHabitsForReschedule()!!
+    }
+
+    private suspend fun rescheduleAllAlarms(context: Context) {
         if (!habitList.isNullOrEmpty()) {
-            println("debug: receiver inside if $habitList")
             for (currentHabit in habitList) {
                 val intent = Intent(context, AlarmReceiver::class.java)
                 intent.putExtra("HABIT_ID", currentHabit.habitId)

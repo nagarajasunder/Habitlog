@@ -41,10 +41,10 @@ class EditHabitFragmentViewModel(
             )
             val alarmManager = application.alarmManager
             alarmManager.cancel(alarmPendingIntent)
-            alarmManager.setExact(
+            alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 newHabit.alarmTime,
-//                AlarmManager.INTERVAL_DAY,
+                AlarmManager.INTERVAL_DAY,
                 alarmPendingIntent
             )
         }

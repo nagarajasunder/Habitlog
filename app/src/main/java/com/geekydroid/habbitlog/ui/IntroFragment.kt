@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.viewpager2.adapter.FragmentViewHolder
 import com.airbnb.lottie.LottieAnimationView
+import com.geekydroid.habbitlog.HabitLogApplication
 import com.geekydroid.habbitlog.R
 
 class IntroFragment(private val currentPage: Int) : Fragment(R.layout.fragment_intro) {
@@ -23,10 +24,20 @@ class IntroFragment(private val currentPage: Int) : Fragment(R.layout.fragment_i
         setUI()
 
         btnStart.setOnClickListener {
+
+            val prefs =
+                requireContext().getSharedPreferences("myPrefs", AppCompatActivity.MODE_PRIVATE)
+            val editor = prefs.edit()
+            editor.putBoolean(
+                (requireActivity().application as HabitLogApplication).FIRST_LAUNCH,
+                false
+            )
+            editor.apply()
             val action = ViewpagerHolderDirections.actionViewpagerHolderToHomeFragment()
             fragmentView.findNavController().navigate(action)
         }
     }
+
 
     private fun setUI() {
         lottieView = fragmentView.findViewById(R.id.lottie_view)

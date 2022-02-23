@@ -14,6 +14,9 @@ interface habitDao {
     @Query("SELECT * FROM HABIT WHERE habitName LIKE '%' || :searchString || '%'")
     fun getAllHabits(searchString: String): LiveData<List<Habit>>
 
+    @Query("SELECT * FROM HABIT")
+    suspend fun getAllHabitsForReschedule(): List<Habit>
+
     @Update
     suspend fun updateHabit(habit: Habit)
 

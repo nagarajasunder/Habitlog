@@ -44,10 +44,10 @@ class CreateNewHabitViewModel(
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        alarmManager.setExact(
+        alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             habit.alarmTime,
-//            AlarmManager.INTERVAL_DAY,
+            AlarmManager.INTERVAL_DAY,
             alarmPendingIntent
         )
 

@@ -79,7 +79,7 @@ class Util {
 
                         val currentDate = currentDateLocale.format(dateFormatter)
 //            val nextDate = LocalDate.parse(dateList[i + 1], dateFormatter).toString()
-                        println(currentDate)
+
                         if (ct == 1) {
                             streakStartDate = dateList[i]
                         }
@@ -201,7 +201,7 @@ class Util {
                         alpha * logList[i - 1].count + ((1 - alpha) * scoreList[i - 1])
                     scoreList.add(currentScore)
                 }
-                println("debug: s $scoreList")
+
             }
         }
 

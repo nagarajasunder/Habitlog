@@ -101,7 +101,7 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
 
         setHasOptionsMenu(true)
         setUI()
-        viewmodel.getLogCountByMonth()
+
         viewmodel.currentDateHabitLog.observe(viewLifecycleOwner) {
             currentDateHabitLog = it
             currentHabitAction =
@@ -132,7 +132,6 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
             }
             if (!list.isNullOrEmpty()) {
                 val ratios = viewmodel.calculateValues(list)
-                println("debug: view ${completedList.size}")
                 updateRatios(ratios, completedList.size)
             }
 

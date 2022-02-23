@@ -9,7 +9,7 @@ import com.geekydroid.habbitlog.entities.*
 
 
 @Database(
-    entities = [Habit::class, HabitAudit::class, temp::class, HabitLog::class],
+    entities = [Habit::class, HabitAudit::class,  HabitLog::class],
     version = 1,
     exportSchema = true
 )
@@ -17,7 +17,6 @@ import com.geekydroid.habbitlog.entities.*
 abstract class MyDatabase : RoomDatabase() {
 
     abstract fun getHabitDao(): habitDao?
-    abstract fun getTempDao(): tempDao?
     abstract fun getHabitLogDao(): habitLogDao?
 
     companion object {

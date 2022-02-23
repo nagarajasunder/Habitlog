@@ -11,10 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.geekydroid.habbitlog.HabitLogApplication
 import com.geekydroid.habbitlog.R
 import com.geekydroid.habbitlog.Util
-import com.geekydroid.habbitlog.entities.temp
-import com.geekydroid.habbitlog.receivers.NotificationReceiver
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -24,13 +21,11 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
 
         if (intent?.action == "HABIT") {
-            println("debug: receiver called")
+
             val habitId = intent.getIntExtra("HABIT_ID", 0)
 
             createNotification(context!!, habitId)
-            val timePeriod = intent.getStringExtra("TIME_PERIOD")
-            Toast.makeText(context, "The Alarm Just got fired $timePeriod", Toast.LENGTH_SHORT)
-                .show()
+
         }
     }
 
@@ -50,8 +45,18 @@ class AlarmReceiver : BroadcastReceiver() {
                 action = context.getString(R.string.notification_action_no)
                 putExtra("HABIT_ID", habitId)
             }
-            val donePendingIntent = PendingIntent.getBroadcast(context, habitId, doneIntent, 0)
-            val skipPendingIntent = PendingIntent.getBroadcast(context, habitId, skipIntent, 0)
+            val donePendingIntent = PendingIntent.getBroadcast(
+                context,
+                habitId,
+                doneIntent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+            val skipPendingIntent = PendingIntent.getBroadcast(
+                context,
+                habitId,
+                skipIntent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
 
             val builder =
                 NotificationCompat.Builder(context, Util.HABIT_ALARM_NOTIFICATION_CHANNEL_ID)
