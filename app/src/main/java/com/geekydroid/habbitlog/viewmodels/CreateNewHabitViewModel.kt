@@ -3,17 +3,20 @@ package com.geekydroid.habbitlog.viewmodels
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.geekydroid.habbitlog.HabitLogApplication
+import com.geekydroid.habbitlog.Util
 import com.geekydroid.habbitlog.entities.Habit
 import com.geekydroid.habbitlog.entities.HabitAudit
 import com.geekydroid.habbitlog.receivers.AlarmReceiver
 import com.geekydroid.habbitlog.repo.CreateNewHabitRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.text.DateFormat
+
+private const val TAG = "CreateNewHabitViewModel"
 
 class CreateNewHabitViewModel(
     private val repo: CreateNewHabitRepository,
@@ -34,6 +37,7 @@ class CreateNewHabitViewModel(
     }
 
     private fun scheduleAlarm(habit: Habit) {
+        Log.d(TAG, "scheduleAlarm: called")
         val alarmManager = application.alarmManager
         val intent = Intent(application.applicationContext, AlarmReceiver::class.java)
         intent.action = "HABIT"
@@ -44,6 +48,7 @@ class CreateNewHabitViewModel(
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+        habit.alarmTime = Util.getAlarmTimeForHabit(habit.alarmTime)
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             habit.alarmTime,

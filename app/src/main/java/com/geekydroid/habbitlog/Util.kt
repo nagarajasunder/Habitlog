@@ -15,6 +15,7 @@ class Util {
 
     companion object {
 
+        val INTERVAL_DAY: Long = 864_00_000L
         var bestStreak: Int = 0
 
         const val HABIT_ALARM_NOTIFICATION_CHANNEL_ID = "HABIT_ALARM_CHANNEL"
@@ -214,6 +215,10 @@ class Util {
         fun isFutureDate(date: Date): Boolean {
             val currentDate = getCurrentDate()
             return date.after(currentDate)
+        }
+
+        fun getAlarmTimeForHabit(alarmTime: Long): Long {
+            return if (alarmTime <= System.currentTimeMillis()) alarmTime + INTERVAL_DAY else alarmTime
         }
 
     }
