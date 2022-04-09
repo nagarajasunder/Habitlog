@@ -13,7 +13,6 @@ import android.widget.CalendarView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -57,7 +56,21 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
     private lateinit var bestStreak: TextView
     private lateinit var totalValue: TextView
     private var streakMap = mutableMapOf<String, Number>()
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val uri = result.data!!.data
+                viewmodel.populateData(
+                    habit,
+                    requireActivity().application as HabitLogApplication,
+                    uri,
+                    Util.bestStreak.toString()
+                )
+                showToast("Data Exported Successfully!!")
+            } else {
+                showToast("Error! Exporting Data")
+            }
+        }
     private val viewmodel: ViewHabitFragmentViewModel by viewModels {
         ViewHabitFragmentViewModelFactory(
             (requireActivity().application as HabitLogApplication).viewHabitFragmentRepo,
@@ -73,21 +86,21 @@ class ViewHabitFragment : Fragment(R.layout.fragment_view_habit) {
 
 
 
-        resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == Activity.RESULT_OK) {
-                    val uri = it.data!!.data
-                    viewmodel.populateData(
-                        habit,
-                        (requireActivity().application as HabitLogApplication),
-                        uri,
-                        Util.bestStreak.toString()
-                    )
-                    showToast("Data Exported Successfully!!")
-                } else {
-                    showToast("Error! Exporting Data")
-                }
-            }
+//        resultLauncher =
+//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+//                if (it.resultCode == Activity.RESULT_OK) {
+//                    val uri = it.data!!.data
+//                    viewmodel.populateData(
+//                        habit,
+//                        (requireActivity().application as HabitLogApplication),
+//                        uri,
+//                        Util.bestStreak.toString()
+//                    )
+//                    showToast("Data Exported Successfully!!")
+//                } else {
+//                    showToast("Error! Exporting Data")
+//                }
+//            }
 
 
     }
